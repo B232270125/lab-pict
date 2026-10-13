@@ -53,3 +53,24 @@ PICT-ийн `To` параметр нь дээрх хоёр сонголтыг н
 ### Тоо: 72 → 14
 
 Бүрэн олонлог 3 × 3 × 4 × 2 = 72. Хязгаарлалтын дараа: happy path 2, [ERROR] (From 2 + To 1 + Amount 2 = 5 утга) × Currency 2 = 10, [SINGLE] 2 (Zero, SameAsFrom). Нийт 2 + 10 + 2 = 14.
+
+## A3: Спецификацийн хүснэгт
+
+| № | From | To | Amount | Currency | Хүлээгдэх үр дүн | Тайлбар |
+|---|---|---|---|---|---|---|
+| 1 | Valid | Valid | Normal | Same | 201 OK | Happy path |
+| 2 | Valid | Valid | Normal | Different | 201 OK | Happy path, хөрвүүлэлттэй |
+| 3 | Frozen | Valid | Normal | Same | 200 ERROR_FROZEN | |
+| 4 | Frozen | Valid | Normal | Different | 200 ERROR_FROZEN | |
+| 5 | Missing | Valid | Normal | Same | 200 ERROR_NO_FROM | |
+| 6 | Missing | Valid | Normal | Different | 200 ERROR_NO_FROM | |
+| 7 | Valid | Missing | Normal | Same | 200 ERROR_NO_TO | |
+| 8 | Valid | Missing | Normal | Different | 200 ERROR_NO_TO | |
+| 9 | Valid | SameAsFrom | Normal | Same | 200 ERROR_SAME_ACCOUNT | [SINGLE] |
+| 10 | Valid | Valid | Zero | Same | 200 ERROR_BAD_AMOUNT | [SINGLE] |
+| 11 | Valid | Valid | OverBalance | Same | 200 ERROR_INSUFFICIENT | |
+| 12 | Valid | Valid | OverBalance | Different | 200 ERROR_INSUFFICIENT | Хөрвүүлсний дараах дүнгээр шалгана |
+| 13 | Valid | Valid | OverLimit | Same | 200 ERROR_LIMIT | |
+| 14 | Valid | Valid | OverLimit | Different | 200 ERROR_LIMIT | Хөрвүүлсний дараах дүнгээр шалгана |
+| 15 | Missing | Missing | Normal | Same | 200 ERROR_NO_FROM | Давхар нөхцөл: NO_FROM ба NO_TO зэрэг, давуу эрэмбээр NO_FROM |
+| 16 | Frozen | Valid | OverBalance | Same | 200 ERROR_FROZEN | Давхар нөхцөл: FROZEN ба INSUFFICIENT зэрэг, давуу эрэмбээр FROZEN |
