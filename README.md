@@ -74,3 +74,21 @@ PICT-ийн `To` параметр нь дээрх хоёр сонголтыг н
 | 14 | Valid | Valid | OverLimit | Different | 200 ERROR_LIMIT | Хөрвүүлсний дараах дүнгээр шалгана |
 | 15 | Missing | Missing | Normal | Same | 200 ERROR_NO_FROM | Давхар нөхцөл: NO_FROM ба NO_TO зэрэг, давуу эрэмбээр NO_FROM |
 | 16 | Frozen | Valid | OverBalance | Same | 200 ERROR_FROZEN | Давхар нөхцөл: FROZEN ба INSUFFICIENT зэрэг, давуу эрэмбээр FROZEN |
+
+
+# Хэсэг B: PICT
+
+## B1: browser.model
+
+Модель: `browser.model` (Content, Cookies: Allow/Restrict/Block; Popups, Addons, Attacks, Forgeries: Yes/No).
+
+| Хувилбар | Мөрийн тоо | Файл |
+|---|---|---|
+| Бүрэн олонлог | 144 | (3×3×2×2×2×2) |
+| 2-way (pairwise) | 10 | results/browser-2way.txt |
+| 3-way (/o:3) | 20 | results/browser-3way.txt |
+
+**2-way тайлбар:** PICT 10 мөр өгсөн нь лекц дээр гараар олсон 9 мөрөөс 1-ээр олон. Хамгийн цөөн мөртэй covering array олох бодлого NP-hard тул PICT greedy алгоритм ашигладаг: мөр бүрт тэр мөчид хамгийн олон шинэ хос хамардаг мөрийг сонгодог. Greedy нь орон нутгийн хувьд сайн сонголт хийдэг ч нийт хэмжээгээр хамгийн цөөнийг баталгаажуулдаггүй, тиймээс 9-өөс нэг мөр илүү гарсан.
+
+**3-way:** 20 мөр гарсан нь бүрэн олонлог 144-ийн ойролцоогоор 14%. Гурвалсан хослолыг хамруулахад 2-way-ээс 2 дахин олон мөр хэрэгтэй ч бүрэн олонлогоос хамаагүй цөөн.
+Гаралтад мөр 10 (Allow Block Yes Yes Yes No) нь мөр 4 (Allow Block No Yes No No)-тэй Content, Cookies ижил. Энэ нь хэвийн, PICT-ийн greedy алгоритм ийм давталт гаргаж болно.
