@@ -1,0 +1,7 @@
+From: Valid, ~Frozen, ~Missing
+To: Valid, ~Missing, ~SameAsFrom
+Amount: Normal, ~Zero, ~Negative, ~OverBalance, ~OverLimit
+Currency: Same, Different
+DailyUsed: Empty, Partial
+
+IF [Amount] = "OverLimit" THEN [DailyUsed] = "Partial";
